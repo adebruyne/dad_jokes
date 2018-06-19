@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const expressHbs = require('express-handlebars');
+const request = require("request");
 
 const static = express.static;
 
@@ -20,7 +21,14 @@ app.get('/',(req, res)=> {
 });
 
 app.get('/puns', (req, res) => {
-    res.send("puns");
+    var url = "http://getpuns.herokuapp.com/api/random";
+
+    request(url, function(error, response, body){
+        if(!error && response.statusCode == 200){
+            var data = JSON.parse(body);
+            res.render("results", {data: data});
+        }
+    })
 })
 
 
