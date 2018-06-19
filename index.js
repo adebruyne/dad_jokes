@@ -17,6 +17,10 @@ app.get('/',(req, res)=> {
         headerText: "Dad puns are how eye roll"
     });
    
+});
+
+app.get('/puns', (req, res) => {
+    res.send("puns");
 })
 
 
